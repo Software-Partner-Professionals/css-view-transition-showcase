@@ -9,3 +9,10 @@ This project is built with :
 - React
 - shadcn-ui
 - Tailwind CSS
+
+## Quick start
+
+```
+npm install
+npm run dev
+```
