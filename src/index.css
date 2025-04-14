@@ -107,6 +107,11 @@
   }
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.1s;
+}
+
 ::view-transition-old(box-transition-fade) {
   animation-duration: 0.1s;
   animation-name: fade-out;
@@ -183,4 +188,8 @@
 
 .prose code {
   @apply px-1 py-0.5 bg-muted rounded text-sm;
+}
+
+@view-transition {
+  navigation: auto;
 }

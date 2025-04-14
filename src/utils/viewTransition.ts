@@ -1,3 +1,5 @@
+import { flushSync } from "react-dom";
+
 interface ViewTransition {
   ready: Promise<void>;
   finished: Promise<void>;
@@ -19,7 +21,9 @@ export const withViewTransition = async (
 ): Promise<void> => {
   if (document.startViewTransition) {
     try {
-      const transition = document.startViewTransition(callback);
+      const transition = document.startViewTransition(
+        async () => await flushSync(callback)
+      );
       await transition.finished;
     } catch (error) {
       console.error("View transition failed:", error);

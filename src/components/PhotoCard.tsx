@@ -1,7 +1,7 @@
 import { Photo } from "@/types";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
+import { useViewTransitionRouter } from "@/hooks/useViewTransitionRouter";
 
 interface PhotoCardProps {
   photo: Photo;
@@ -16,6 +16,7 @@ const PhotoCard = ({
   layout = "grid",
   className,
 }: PhotoCardProps) => {
+  const { navigateWithTransition } = useViewTransitionRouter();
   const viewTransitionStyle = {
     viewTransitionName: photo.viewTransitionName,
   };
@@ -38,8 +39,12 @@ const PhotoCard = ({
     horizontal: "p-4 w-2/3 flex flex-col justify-center",
   };
 
+  const onClick = () => {
+    navigateWithTransition(`/photo/${photo.id}`);
+  };
+
   return (
-    <Link to={`/photo/${photo.id}`} viewTransition>
+    <div onClick={onClick} className="cursor-pointer">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -77,7 +82,7 @@ const PhotoCard = ({
           </div>
         </div>
       </motion.div>
-    </Link>
+    </div>
   );
 };
 
